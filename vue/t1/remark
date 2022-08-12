@@ -1,0 +1,83 @@
+/*
+ * @Author: error: git config user.name && git config user.email & please set dead value or install git
+ * @Date: 2022-07-29 09:33:57
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2022-07-29 13:14:53
+ * @FilePath: \my-appd:\work\self\daily\vue\t1\remark
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
+definePrototype
+proxy(data, {
+  get(target, key, receiver) { },
+  set(taget, key, value, receiver){}
+})  //data 代理的目标对象
+
+
+//发布 / 订阅模式(Publish subscribe model)  $on $emit
+// 1. 事件中心
+// 2. 订阅者
+// 3. 发布者
+// 4. 事件类型
+// 5. 事件处理函数
+class EventEmitter { 
+  constructor() {
+
+    // this.events = {}
+  }
+  on(eventName, callback) {
+    if (!this.events[eventName]) {
+      this.events[eventName] = [callback]
+    } else {
+      this.events[eventName].push(callback)
+    }
+  }
+  emit(eventName, data) {
+    if (this.events[eventName]) {
+      this.events[eventName].forEach(cb => cb(data))
+    }
+  }
+  off(eventName, callback) {
+    if (this.events[eventName]) {
+      this.events[eventName] = this.events[eventName].filter(cb => cb !== callback)
+    }
+  }
+  once(eventName, callback) {
+    const one = (...args) => {
+      callback(...args)
+      this.off(eventName, one)
+    }
+    this.on(eventName, one)
+  }
+}
+
+// 观察者模式  (Observer model) $watch
+// 1. 被观察者
+// 2. 观察者
+// 3. 事件类型
+// 4. 事件处理函数
+/* 被观察者 */
+class Subject {
+  constructor() {
+    this.observers = []
+  }
+  add(observer) {
+    this.observers.push(observer)
+  }
+  notify() {
+    this.observers.forEach(observer => observer.update())
+  }
+}
+/* 观察者 */
+class Observer {
+  constructor(name, subject) {
+    this.name = name
+    this.subject = subject
+    this.subject.add(this)
+  }
+  update() {
+    console.log(`${this.name} update, state: ${this.subject.getState()}`)
+  }
+}
+_开头 私有成员
+$开头 公共成员
+
