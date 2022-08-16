@@ -8,10 +8,20 @@
  */
 const minimist = require('minimist');
 const chalk  = require('chalk');
-
 const argv = minimist(process.argv.slice(2));
 
+const inquirer = require('inquirer');
 console.log(chalk)
 
 //console.log(argv)
 console.log(chalk.blue('Hello') + ' ' + chalk.bgRed.red('World'));
+
+const promptList = [{
+  type:'input',
+  message:'设置一个用户名',
+  name:'name'
+}]
+
+inquirer.prompt(promptList).then(res=>{
+  console.log(res)
+})

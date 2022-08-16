@@ -1,4 +1,5 @@
 ### 此注释为个人开发命令行工具所需的一些插件
 
-+ minimist
-+ chalk 
++ minimist  //命令行获取参数
++ chalk //输出有颜色的提示
++ inquirer  命令行交互
