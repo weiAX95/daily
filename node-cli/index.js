@@ -11,16 +11,25 @@ const chalk  = require('chalk');
 const argv = minimist(process.argv.slice(2));
 
 const inquirer = require('inquirer');
-console.log(chalk)
+//console.log(chalk)
+const path  = require('path');
+const fs = require('fs');
 
-//console.log(argv)
-console.log(chalk.blue('Hello') + ' ' + chalk.bgRed.red('World'));
+//onsole.log(argv)
+console.log("当前路径:");
+console.log(path.resolve(__dirname))
+//console.log(chalk.blue('Hello') + ' ' + chalk.bgRed.yellow('World'));
 
-const promptList = [{
+
+
+const promptList = [
+ {type:'rawlist',message:'test',name:'first',choices:['yes','no']},
+ {
   type:'input',
   message:'设置一个用户名',
   name:'name'
-}]
+  }
+]
 
 inquirer.prompt(promptList).then(res=>{
   console.log(res)
